@@ -10,9 +10,18 @@ library("dplyr")
 # use `left_join()` to join on the "airports" dataframe, which has the airport
 # information
 # Which airport had the largest average arrival delay?
+ave_delay_df <- flights %>% 
+  group_by(dest) %>% 
+  summarize(ave_arr_delay = mean(arr_delay, na.rm = TRUE)) %>% 
+  mutate(faa = dest)
 
+left_join(ave_delay_df,airports, by = "faa") %>% 
+  select(faa, ave_arr_delay, name)
 
 # Create a dataframe of the average arrival delay for each _airline_, then use
 # `left_join()` to join on the "airlines" dataframe
 # Which airline had the smallest average arrival delay?
-
+flights %>% 
+  group_by(carrier) %>% 
+  summarize(ave_arr_delay = mean(arr_delay, na.rm = TRUE)) %>% 
+  left_join(airlines, by = "carrier")
