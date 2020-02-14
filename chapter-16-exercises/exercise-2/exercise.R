@@ -66,7 +66,8 @@ ggplot(data = diamonds_sample) +
 # Change the color of the previous plot using a ColorBrewer scale of your choice. 
 # What looks nice?
 ggplot(data = diamonds_sample) + 
-  geom_point(mapping = aes(x = carat, y = price, color = clarity))
+  geom_point(mapping = aes(x = carat, y = price, color = clarity)) +
+  scale_color_brewer(palette = "set3")
 
 
 ## Coordinate Systems
